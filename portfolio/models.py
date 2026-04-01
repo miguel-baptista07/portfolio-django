@@ -32,3 +32,21 @@ class TFC(models.Model):
         verbose_name = 'TFC'
         verbose_name_plural = 'TFCs'
         ordering = ['-ano']
+
+
+class UnidadeCurricular(models.Model):
+    codigo = models.CharField(max_length=20, unique=True)
+    nome = models.CharField(max_length=300)
+    ano_curricular = models.IntegerField()
+    semestre = models.IntegerField()
+    ects = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    duracao = models.CharField(max_length=50, blank=True)
+    url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Unidade Curricular'
+        verbose_name_plural = 'Unidades Curriculares'
+        ordering = ['ano_curricular', 'semestre']
