@@ -1,0 +1,29 @@
+[
+    {
+        "titulo": "Sistema de Gestao de Tarefas com IA",
+        "resumo": "Desenvolvimento de um sistema inteligente de gestao de tarefas que utiliza machine learning para priorizar automaticamente as tarefas do utilizador com base nos seus habitos e prazos.",
+        "autor": "Joao Silva",
+        "ano": 2025,
+        "area": "Inteligencia Artificial",
+        "classificacao": 18.5,
+        "url_repositorio": "https://github.com/joao/task-ai-manager"
+    },
+    {
+        "titulo": "Aplicacao Mobile para Monitorizacao de Saude",
+        "resumo": "Aplicacao movel que permite aos utilizadores monitorizar sinais vitais e atividade fisica, integrando com wearables e fornecendo recomendacoes personalizadas.",
+        "autor": "Maria Santos",
+        "ano": 2024,
+        "area": "Desenvolvimento Mobile",
+        "classificacao": 17.0,
+        "url_repositorio": "https://github.com/maria/health-monitor"
+    },
+    {
+        "titulo": "Plataforma de E-learning com Realidade Aumentada",
+        "resumo": "Plataforma educativa que utiliza realidade aumentada para criar experiencias de aprendizagem imersivas, permitindo visualizar conceitos complexos em 3D.",
+        "autor": "Pedro Costa",
+        "ano": 2025,
+        "area": "Realidade Aumentada",
+        "classificacao": 19.0,
+        "url_repositorio": "https://github.com/pedro/ar-learning"
+    }
+]
