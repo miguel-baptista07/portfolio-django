@@ -6,10 +6,15 @@ Aplicação web Django que serve como portfolio académico e pessoal, desenvolvi
 
 ### Localmente (Windows)
 ```bash
-cd portfolio_project
-C:\Users\migue\venv\Scripts\python.exe manage.py runserver
+cd C:\Users\migue\portfolio_project
+venv\Scripts\activate
+python manage.py runserver
 ```
 Aceder em: http://127.0.0.1:8000/admin
+
+**Credenciais admin:**
+- Username: `migue`
+- Password: `12345`
 
 ### No GitHub Codespace
 ```bash
