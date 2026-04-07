@@ -50,7 +50,8 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 **Decisão 1 — Incluir `url_github`:** O enunciado destaca que é muito importante para entrevistas de emprego.  
 **Decisão 2 — Incluir `conceitos_aplicados`:** Mostra o que foi aprendido em cada projeto — o que um recrutador quer saber.  
 **Decisão 3 — Incluir `data_inicio` e `data_fim`:** Permitem ordenar cronologicamente e mostrar a evolução ao longo do curso.  
-**Decisão 4 — FK para UnidadeCurricular:** Contextualiza o projeto académico e mostra a progressão ao longo do curso.
+**Decisão 4 — FK para UnidadeCurricular:** Contextualiza o projeto académico e mostra a progressão ao longo do curso.  
+**Fonte dos dados:** Os projetos incluídos foram retirados do meu portfolio pessoal em https://miguel-baptista-plum.vercel.app/ — são projetos reais que desenvolvi ao longo do curso e que já estavam documentados no meu site pessoal.
 
 ### 5. Tecnologia
 **Decisão 1 — Incluir `nivel_interesse` (1-5):** Permite mostrar as tecnologias favoritas de forma simples e visual.  
