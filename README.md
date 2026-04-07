@@ -1,106 +1,43 @@
-# Portfolio Project
+# Portfolio Django — Miguel Baptista
 
-Projeto de portfólio Django para gestão de trabalhos finais de curso (TFC), unidades curriculares e making-of.
+Aplicação web Django que serve como portfolio académico e pessoal, desenvolvida no âmbito da UC de Programação Web da Licenciatura em Engenharia Informática da Universidade Lusófona.
 
-## Tecnologias
+## Como correr o projeto
 
-- **Python 3.13**
-- **Django 5.2**
-- **SQLite** (desenvolvimento) / **MySQL** (produção)
-- **requests** (integração com API externa)
-
-## Funcionalidades
-
-- Gestão de TFCs (Trabalhos Finais de Curso)
-- Gestão de Unidades Curriculares (importação via API da Lusófona)
-- Gestão de Making-of
-- Admin Django configurado com listagem e pesquisa
-
-## Instalação Local
-
-### 1. Clonar o repositório
-
+### Localmente (Windows)
 ```bash
-git clone <url-do-repositorio>
 cd portfolio_project
+C:\Users\migue\venv\Scripts\python.exe manage.py runserver
 ```
+Aceder em: http://127.0.0.1:8000/admin
 
-### 2. Criar ambiente virtual
-
+### No GitHub Codespace
 ```bash
-python -m venv venv
-```
-
-### 3. Ativar ambiente virtual
-
-**Windows:**
-```bash
-venv\Scripts\activate
-```
-
-**Linux/Mac:**
-```bash
-source venv/bin/activate
-```
-
-### 4. Instalar dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-### 5. Aplicar migrações
-
-```bash
+pip install django pillow requests
 python manage.py migrate
-```
-
-### 6. Criar superutilizador (opcional)
-
-```bash
 python manage.py createsuperuser
+python manage.py runserver 0.0.0.0:8000
 ```
-
-### 7. Correr o servidor de desenvolvimento
-
-```bash
-python manage.py runserver
-```
-
-O projeto estará disponível em: http://127.0.0.1:8000/
-
-## Scripts de Carregamento de Dados
-
-### Carregar TFCs de exemplo
-
-```bash
-python data/load_tfcs.py
-```
-
-### Carregar UCs da API da Lusófona
-
-```bash
-python data/load_ucs_lusofona.py
-```
+Aceder pelo separador PORTS → porta 8000
 
 ## Estrutura do Projeto
+- `portfolio/` — App Django com os modelos
+- `data/` — Scripts de carregamento de dados e ficheiros JSON
+- `media/makingof/` — Fotografias do processo (DER desenhado à mão)
+- `MAKING_OF.md` — Diário de bordo do processo de modelação
 
-```
-portfolio_project/
-├── portfolio/          # App principal
-│   ├── models.py       # Modelos: TFC, UnidadeCurricular, MakingOf
-│   ├── admin.py        # Registo no admin
-│   └── migrations/     # Migrações da base de dados
-├── data/               # Scripts e dados de carregamento
-│   ├── load_tfcs.py
-│   ├── load_ucs_lusofona.py
-│   ├── tfcs.json
-│   └── curso_LEI.json
-├── manage.py
-├── requirements.txt
-└── README.md
-```
+## Modelos
+Licenciatura, UnidadeCurricular, Docente, Projeto, Tecnologia, TFC, Competencia, Formacao, Certificado (entidade extra), MakingOf
 
-## Licença
+## Dados carregados
+- 1 Licenciatura (LEI)
+- 29 Unidades Curriculares com descrições da API Lusófona
+- 3 Docentes reais com emails e URLs da Lusófona
+- 3 Projetos com imagens
+- 9 Tecnologias
+- 35 TFCs
+- 8 Competências
+- 5 Formações + 1 Certificado
 
-MIT
+## Making Of
+Documentação completa do processo em [MAKING_OF.md](MAKING_OF.md)
