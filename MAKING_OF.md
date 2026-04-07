@@ -16,7 +16,9 @@ O projeto consiste numa aplicação web Django que serve como portfolio académi
 
 ## Diagrama Entidade-Relação (DER)
 
-O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fotografia encontra-se em `media/makingof/DER- portfolio.jpeg`.
+O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fotografia encontra-se em `media/makingof/DER-portfolio.jpeg`.
+
+![DER desenhado à mão](media/makingof/DER-%20portfolio.jpeg)
 
 ![DER desenhado à mão](media/makingof/DER-%20portfolio.jpeg)
 
@@ -61,12 +63,12 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 **Decisão 1 — Usar `data_inicio` e `data_fim`:** Permite ordenação cronológica automática e filtrar formações em curso.  
 **Decisão 2 — Incluir `tipo`:** Diferencia entre Ensino Superior, Certificação Online, Experiência Profissional e Associação Estudantil.
 
-### 9. Certificado ⭐ (Entidade Extra)
+### 9. Certificado (Entidade Extra)
 **Justificação:** Separei o Certificado da Formação porque nem todas as formações geram um certificado com código verificável. Segue o princípio da normalização — evita campos nulos em muitas formações.  
 **Decisão 1 — Separar de Formação:** Uma formação pode não ter certificado (ex: participação no NEDI).  
 **Decisão 2 — FK com Formação:** Um certificado pertence a uma formação específica.
 
-### 10. MakingOf 🔴
+### 10. MakingOf 
 **Decisão 1 — `entidade_relacionada` como CharField:** Simplifica o modelo em vez de criar FKs separadas para cada entidade.  
 **Decisão 2 — Incluir `uso_ia`:** O enunciado especifica explicitamente que o uso de IA deve ser documentado.
 
