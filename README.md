@@ -2,28 +2,10 @@
 
 Aplicação web Django que serve como portfolio académico e pessoal, desenvolvida no âmbito da UC de Programação Web da Licenciatura em Engenharia Informática da Universidade Lusófona.
 
-## Como correr o projeto
-
-### Localmente (Windows)
-```bash
-cd C:\Users\migue\portfolio_project
-venv\Scripts\activate
-python manage.py runserver
-```
-Aceder em: http://127.0.0.1:8000/admin
-
 **Credenciais admin:**
 - Username: `migue`
 - Password: `12345`
 
-### No GitHub Codespace
-```bash
-pip install django pillow requests
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver 0.0.0.0:8000
-```
-Aceder pelo separador PORTS → porta 8000
 
 ## Estrutura do Projeto
 - `portfolio/` — App Django com os modelos
