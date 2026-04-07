@@ -4,8 +4,10 @@ from .models import MakingOf, TFC
 
 @admin.register(MakingOf)
 class MakingOfAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'data_registo']
-    search_fields = ['titulo', 'descricao']
+    list_display = ['titulo', 'entidade_relacionada', 'data_registo']
+    list_filter = ['entidade_relacionada', 'data_registo']
+    search_fields = ['titulo', 'descricao', 'entidade_relacionada']
+    ordering = ['entidade_relacionada', 'data_registo']
 
 
 @admin.register(TFC)

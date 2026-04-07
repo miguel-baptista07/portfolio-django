@@ -4,8 +4,12 @@ from django.db import models
 class MakingOf(models.Model):
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
-    imagem = models.ImageField(upload_to='making_of/', blank=True, null=True)
-    data_registo = models.DateTimeField(auto_now_add=True)
+    decisoes_tomadas = models.TextField()
+    erros_correcoes = models.TextField(blank=True)
+    uso_ia = models.TextField(blank=True)
+    foto_caderno = models.ImageField(upload_to='makingof/', blank=True, null=True)
+    data_registo = models.DateField(auto_now_add=True)
+    entidade_relacionada = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.titulo
@@ -13,7 +17,7 @@ class MakingOf(models.Model):
     class Meta:
         verbose_name = 'Making Of'
         verbose_name_plural = 'Making Of'
-        ordering = ['-data_registo']
+        ordering = ['entidade_relacionada', 'data_registo']
 
 
 class TFC(models.Model):
