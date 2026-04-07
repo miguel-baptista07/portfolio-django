@@ -17,13 +17,16 @@ class MakingOf(models.Model):
 
 
 class TFC(models.Model):
-    titulo = models.CharField(max_length=300)
-    resumo = models.TextField()
-    autor = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=500)
+    autor = models.CharField(max_length=300)
+    orientador = models.CharField(max_length=300, blank=True)
+    licenciatura_nome = models.CharField(max_length=300, blank=True)
     ano = models.IntegerField()
-    area = models.CharField(max_length=100)
-    classificacao = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
-    url_repositorio = models.URLField(blank=True)
+    email = models.EmailField(blank=True)
+    url_pdf = models.URLField(max_length=500, blank=True, null=True)
+    url_imagem = models.URLField(max_length=500, blank=True, null=True)
+    resumo = models.TextField(blank=True)
+    classificacao = models.IntegerField(default=3)
 
     def __str__(self):
         return self.titulo

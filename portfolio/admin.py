@@ -10,6 +10,6 @@ class MakingOfAdmin(admin.ModelAdmin):
 
 @admin.register(TFC)
 class TFCAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'autor', 'ano', 'area', 'classificacao']
-    search_fields = ['titulo', 'autor', 'area']
-    list_filter = ['ano', 'area']
+    list_display = ['titulo', 'autor', 'ano', 'licenciatura_nome', 'classificacao']
+    search_fields = ['titulo', 'autor', 'licenciatura_nome']
+    list_filter = ['ano', 'licenciatura_nome']

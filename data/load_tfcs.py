@@ -1,64 +1,72 @@
-#!/usr/bin/env python
-"""Script para carregar TFCs a partir de um ficheiro JSON."""
-
 import os
 import sys
 import json
 import django
 
-# Adicionar raiz do projeto ao PYTHONPATH
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_project.settings')
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 sys.path.insert(0, project_root)
 
-# Configurar ambiente Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_project.settings')
 django.setup()
 
 from portfolio.models import TFC
 
+JSON_PATH = os.path.join(script_dir, 'tfcs_deisi_2024_2025.json')
 
-def load_tfcs(json_path):
-    """Carrega TFCs do ficheiro JSON para a base de dados."""
+with open(JSON_PATH, encoding='utf-8') as f:
+    data = json.load(f)
+
+tfcs = data.get('tfcs', [])
+print(f"Total de TFCs no ficheiro: {len(tfcs)}")
+
+criados = 0
+atualizados = 0
+erros = 0
+
+for entry in tfcs:
     try:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            tfcs_data = json.load(f)
-    except FileNotFoundError:
-        print(f"Erro: Ficheiro '{json_path}' nao encontrado.")
-        return
-    except json.JSONDecodeError as e:
-        print(f"Erro ao processar JSON: {e}")
-        return
+        titulo = entry.get('titulo', '').strip()
+        autor = ', '.join(entry.get('autores', []))
+        orientador = ', '.join(entry.get('orientadores', []))
+        licenciatura_nome = ', '.join(entry.get('licenciaturas', []))
+        ano = int(entry.get('ano', 0))
+        email = entry.get('email', '') or ''
+        url_pdf = entry.get('link_pdf') or None
+        url_imagem = entry.get('imagem') or None
+        resumo = entry.get('sumario', '') or ''
+        classificacao = int(entry.get('rating', 3))
+        classificacao = max(1, min(5, classificacao))
 
-    print(f"A carregar {len(tfcs_data)} TFC(s)...")
+        obj, created = TFC.objects.get_or_create(
+            titulo=titulo,
+            autor=autor,
+            defaults={
+                'orientador': orientador,
+                'licenciatura_nome': licenciatura_nome,
+                'ano': ano,
+                'email': email,
+                'url_pdf': url_pdf,
+                'url_imagem': url_imagem,
+                'resumo': resumo,
+                'classificacao': classificacao,
+            }
+        )
 
-    for tfc_data in tfcs_data:
-        try:
-            tfc, created = TFC.objects.get_or_create(
-                titulo=tfc_data['titulo'],
-                defaults={
-                    'resumo': tfc_data.get('resumo', ''),
-                    'autor': tfc_data.get('autor', ''),
-                    'ano': tfc_data.get('ano', 2026),
-                    'area': tfc_data.get('area', ''),
-                    'classificacao': tfc_data.get('classificacao'),
-                    'url_repositorio': tfc_data.get('url_repositorio', ''),
-                }
-            )
-            if created:
-                print(f"TFC criado: {tfc.titulo}")
-            else:
-                print(f"TFC atualizado: {tfc.titulo}")
-        except KeyError as e:
-            print(f"Erro: Campo obrigatorio em falta - {e}")
-        except Exception as e:
-            print(f"Erro ao processar TFC '{tfc_data.get('titulo', 'desconhecido')}': {e}")
+        if created:
+            criados += 1
+            print(f"  [CRIADO] {titulo[:70]}")
+        else:
+            atualizados += 1
+            print(f"  [JA EXISTE] {titulo[:70]}")
 
-    print("Carregamento concluido!")
+    except Exception as e:
+        erros += 1
+        print(f"  [ERRO] {entry.get('titulo', '?')[:70]} -> {e}")
 
-
-if __name__ == '__main__':
-    # Caminho relativo a partir da raiz do projeto
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(script_dir, 'tfcs.json')
-    load_tfcs(json_path)
+print(f"\n=== Resultado ===")
+print(f"Criados:     {criados}")
+print(f"Ja existiam: {atualizados}")
+print(f"Erros:       {erros}")
+print(f"Total:       {criados + atualizados}")
