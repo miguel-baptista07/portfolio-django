@@ -17,16 +17,19 @@ DOCENTES = [
         'nome':         'Berend Willem Martijn Kuipers',
         'email':        'martijn.kuipers@ulusofona.pt',
         'url_lusofona': 'https://www.ulusofona.pt/docentes/berend-willem-martijn-kuipers-8094',
+        'uc_codigo':    'AC1',
     },
     {
         'nome':         'Lucio Studer Ferreira',
         'email':        'lucio.studer@ulusofona.pt',
         'url_lusofona': 'https://www.ulusofona.pt/docentes/lucio-miguel-studer-ferreira-6069',
+        'uc_codigo':    'PW1',
     },
     {
         'nome':         'Pedro Hugo De Queirós Alves',
         'email':        'pedro.alves@ulusofona.pt',
         'url_lusofona': 'https://www.ulusofona.pt/docentes/pedro-hugo-de-queiros-alves-4997',
+        'uc_codigo':    'LP2',
     },
 ]
 
@@ -36,27 +39,29 @@ if __name__ == '__main__':
     deleted, _ = Docente.objects.all().delete()
     print(f'Docentes apagados: {deleted}\n')
 
-    # 2. Criar os 3 docentes
-    docentes = []
+    # 2. Criar os 3 docentes e associar às UCs
+    criados = erros = 0
     for d in DOCENTES:
-        obj = Docente.objects.create(
-            nome=d['nome'],
-            email=d['email'],
-            url_lusofona=d['url_lusofona'],
-            foto=None,
-        )
-        docentes.append(obj)
-        print(f'  [CRIADO] {obj.nome}')
-        print(f'           {obj.email}')
-        print(f'           {obj.url_lusofona}')
-
-    # 3. Associar os 3 docentes a todas as UCs
-    ucs = UnidadeCurricular.objects.all()
-    print(f'\nA associar {len(docentes)} docentes a {ucs.count()} UCs...')
-    for uc in ucs:
-        uc.docentes.set(docentes)
+        try:
+            docente = Docente.objects.create(
+                nome=d['nome'],
+                email=d['email'],
+                url_lusofona=d['url_lusofona'],
+                foto=None,
+            )
+            uc = UnidadeCurricular.objects.get(codigo=d['uc_codigo'])
+            uc.docentes.add(docente)
+            print(f'  [CRIADO] {docente.nome}')
+            print(f'           UC: {uc.codigo} - {uc.nome}')
+            criados += 1
+        except UnidadeCurricular.DoesNotExist:
+            print(f'  [ERRO] UC "{d["uc_codigo"]}" nao encontrada para {d["nome"]}')
+            erros += 1
+        except Exception as e:
+            print(f'  [ERRO] {d["nome"]}: {e}')
+            erros += 1
 
     print(f'\n=== Resultado ===')
-    print(f'Docentes criados: {len(docentes)}')
-    print(f'UCs atualizadas:  {ucs.count()}')
-    print('\nConcluído.')
+    print(f'Docentes criados: {criados}')
+    print(f'Erros:            {erros}')
+    print('\nConcluido.')
