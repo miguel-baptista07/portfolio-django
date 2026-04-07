@@ -12,6 +12,12 @@ Este documento é o diário de bordo do processo de modelação e desenvolviment
 
 O projeto consiste numa aplicação web Django que serve como portfolio académico e pessoal, reunindo informação sobre a licenciatura, unidades curriculares, projetos, tecnologias, competências e formações.
 
+## Escolhas de Formato
+
+**Formato Markdown:** Optei por documentar este Making Of em Markdown porque estou familiarizado com este formato através dos Worklogs semanais que realizo na disciplina de Laboratório de Manutenção de Software, lecionada pelo Professor Pedro Alves. Esta familiaridade permite-me escrever de forma mais fluida e estruturada.
+
+**Formato do DER:** O DER foi desenhado no formato entidade-relação clássico (tabelas com atributos e linhas de relação) porque este foi o formato estudado e praticado na UC de Bases de Dados no semestre anterior. Tentei outras abordagens mais simplificadas mas o resultado ficava desorganizado e difícil de ler. O formato que conheço permite-me representar com mais clareza os atributos, tipos e cardinalidades de cada entidade.
+
 ---
 
 ## Diagrama Entidade-Relação (DER)
