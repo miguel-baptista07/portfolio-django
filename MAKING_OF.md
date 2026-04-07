@@ -18,6 +18,8 @@ O projeto consiste numa aplicação web Django que serve como portfolio académi
 
 O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fotografia encontra-se em `media/makingof/DER- portfolio.jpeg`.
 
+![DER desenhado à mão](media/makingof/DER-%20portfolio.jpeg)
+
 ---
 
 ## Decisões de Modelação por Entidade
