@@ -1,6 +1,110 @@
 from django.db import models
 
 
+class Licenciatura(models.Model):
+    nome = models.CharField(max_length=200)
+    sigla = models.CharField(max_length=20, blank=True)
+    url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Licenciatura'
+        verbose_name_plural = 'Licenciaturas'
+        ordering = ['nome']
+
+
+class Docente(models.Model):
+    nome = models.CharField(max_length=200)
+    email = models.EmailField(blank=True)
+    url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Docente'
+        verbose_name_plural = 'Docentes'
+        ordering = ['nome']
+
+
+class Tecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField(blank=True)
+    url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Tecnologia'
+        verbose_name_plural = 'Tecnologias'
+        ordering = ['nome']
+
+
+class Projeto(models.Model):
+    titulo = models.CharField(max_length=300)
+    descricao = models.TextField(blank=True)
+    ano = models.IntegerField()
+    url = models.URLField(blank=True)
+    tecnologias = models.ManyToManyField(Tecnologia, blank=True)
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = 'Projeto'
+        verbose_name_plural = 'Projetos'
+        ordering = ['-ano']
+
+
+class Competencia(models.Model):
+    nome = models.CharField(max_length=200)
+    descricao = models.TextField(blank=True)
+    nivel = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Competência'
+        verbose_name_plural = 'Competências'
+        ordering = ['nome']
+
+
+class Formacao(models.Model):
+    titulo = models.CharField(max_length=300)
+    instituicao = models.CharField(max_length=200)
+    ano = models.IntegerField()
+    descricao = models.TextField(blank=True)
+    url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = 'Formação'
+        verbose_name_plural = 'Formações'
+        ordering = ['-ano']
+
+
+class Certificado(models.Model):
+    titulo = models.CharField(max_length=300)
+    instituicao = models.CharField(max_length=200)
+    ano = models.IntegerField()
+    url = models.URLField(blank=True)
+    imagem = models.ImageField(upload_to='certificados/', blank=True, null=True)
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = 'Certificado'
+        verbose_name_plural = 'Certificados'
+        ordering = ['-ano']
+
+
 class MakingOf(models.Model):
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
