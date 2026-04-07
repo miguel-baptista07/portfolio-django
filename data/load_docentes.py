@@ -1,5 +1,9 @@
-import os
+# -*- coding: utf-8 -*-
 import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+import os
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_project.settings')
@@ -15,46 +19,46 @@ DOCENTES = [
     'Brena Kelly Sousa Lima',
     'Bruno D. Ferreira-saraiva',
     'Bruno Miguel Pereira Cipriano',
-    'Carlos Alberto Teixeira Iglesias',
+    'Carlos Alberto Teixeira Iglésias',
     'Cristiane Ferreira',
     'Cristina Maria Ribeiro Guerra',
     'Daniel Filipe Sobral Fernandes',
-    'Daniel Tomas De Maia Mozart Silveira',
+    'Daniel Tomás De Maia Mozart Silveira',
     'Diogo Soares Pereira Gil Morais',
     'Duarte Nuno Donas Botto Neves',
     'Francisco Fernandes Castro Rego',
-    'Muratore, Giosue',
+    'Muratore, Giosuè',
     'Herminio Miguel Sobral Tavares',
     'Houda Harkat',
     'Iolanda Raquel Fernandes Velho',
-    'Joao Caldeira',
-    'Joao Licinio Cabral Da Silva',
-    'Joao Pedro Cunha Da Silva Eleuterio',
-    'Joao Pedro Craveiro',
-    'Joao Pedro Lavadinho Moreira',
-    'Jose Alexandre Silva Paredes',
-    'Jose Cascais Bras',
+    'João Caldeira',
+    'João Licinio Cabral Da Silva',
+    'João Pedro Cunha Da Silva Eleutério',
+    'João Pedro Craveiro',
+    'João Pedro Lavadinho Moreira',
+    'José Alexandre Silva Paredes',
+    'José Cascais Brás',
     'Leonardo De Carlo',
     'Lucio Studer Ferreira',
     'Luis Gomes',
-    'Luis Filipe Duarte Sousa',
+    'Luís Filipe Duarte Sousa',
     'Manuel Pita',
     'Marcelo Garcia Domingues',
-    'Maria Da Conceicao Goncalves Costa',
-    'Maria Jose De Almeida E Silva',
+    'Maria Da Conceição Gonçalves Costa',
+    'Maria José De Almeida E Silva',
     'Marina Pereira Martins',
-    'Martim Duarte Barja Mourao',
+    'Martim Duarte Barja Mourão',
     'Paulo Jorge Tavares Guedes',
-    'Pedro Arroz Correia Bonifacio Serra',
-    'Pedro De Almeida Perdigao',
-    'Pedro Hugo De Queiros Alves',
+    'Pedro Arroz Correia Bonifácio Serra',
+    'Pedro De Almeida Perdigão',
+    'Pedro Hugo De Queirós Alves',
     'Ricardo Jorge Serras Santos',
     'Rodrigo Coutinho Correia',
-    'Rui Filipe Guimaraes Dos Santos',
+    'Rui Filipe Guimarães Dos Santos',
     'Rui Ribeiro',
-    'Rute Maria Da Silva Proenca Muchacho',
+    'Rute Maria Da Silva Proença Muchacho',
     'Sergio Pedro Mestre Ferreira',
-    'Sergio Rodrigues Nunes',
+    'Sérgio Rodrigues Nunes',
     'Sofia Da Silva Fernandes',
     'Sofia Naique',
     'Thiago Gustavo Vieira De Paiva',
@@ -64,64 +68,60 @@ DOCENTES = [
 
 
 def load_docentes():
-    criados = existentes = erros = 0
+    deleted, _ = Docente.objects.all().delete()
+    print(f'Docentes apagados: {deleted}\n')
+
+    criados = erros = 0
 
     for nome in DOCENTES:
         try:
-            obj, created = Docente.objects.get_or_create(
+            obj = Docente.objects.create(
                 nome=nome,
-                defaults={
-                    'email':       '',
-                    'url_lusofona': '',
-                    'foto':        None,
-                }
+                email='',
+                url_lusofona='',
+                foto=None,
             )
-            status = 'CRIADO' if created else 'JA EXISTE'
-            print(f'  [{status}] {obj.nome}')
-            if created:
-                criados += 1
-            else:
-                existentes += 1
+            print(f'  [CRIADO] {obj.nome}')
+            criados += 1
         except Exception as e:
             erros += 1
             print(f'  [ERRO] {nome}: {e}')
 
     print(f'\n=== Resultado ===')
-    print(f'Criados:     {criados}')
-    print(f'Ja existiam: {existentes}')
-    print(f'Erros:       {erros}')
-    print(f'Total:       {criados + existentes}')
+    print(f'Criados: {criados}')
+    print(f'Erros:   {erros}')
+    print(f'Total:   {criados}')
 
 
 def load_makingof():
-    obj, created = MakingOf.objects.get_or_create(
-        titulo='Modelacao dos Docentes',
+    obj, created = MakingOf.objects.update_or_create(
+        titulo='Modelação dos Docentes',
         entidade_relacionada='Docente',
         defaults={
             'descricao': (
-                'Carreguei 51 docentes do curso LEI retirados do site da Lusofona.'
+                'Carreguei 51 docentes do curso LEI retirados do site da Lusófona.'
             ),
             'decisoes_tomadas': (
                 'Decidi incluir nome, email, url_lusofona e foto. O campo url_lusofona '
-                'e importante para ligar a pagina pessoal do docente no site da Lusofona, '
-                'conforme o enunciado. Os emails e URLs serao preenchidos manualmente no admin.'
+                'é importante para ligar à página pessoal do docente no site da Lusófona, '
+                'conforme o enunciado. Os emails e URLs serão preenchidos manualmente no admin.'
             ),
             'erros_correcoes': (
-                'Alguns nomes tinham formatacao invertida (ex: Muratore, Giosue) - foram '
+                'Alguns nomes tinham formatação invertida (ex: Muratore, Giosuè) — foram '
                 'mantidos como estavam na fonte original.'
             ),
             'uso_ia': (
                 'Utilizei o Claude para estruturar o script. A lista de docentes foi '
-                'retirada do site da Lusofona.'
+                'retirada do site da Lusófona.'
             ),
         }
     )
-    status = 'CRIADO' if created else 'JA EXISTE'
+    status = 'CRIADO' if created else 'ATUALIZADO'
     print(f'\nMaking Of: [{status}] {obj.titulo}')
 
 
 if __name__ == '__main__':
-    print('A carregar docentes...\n')
+    print('A carregar docentes com acentos...\n')
     load_docentes()
     load_makingof()
-    print('\nConcluido.')
+    print('\nConcluído.')
