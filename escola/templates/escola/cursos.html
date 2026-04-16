@@ -7,7 +7,7 @@
     <article>
         <header>
             <h3>{{ curso.nome }}</h3>
-            <img src="{{ curso.imagem.url }}" alt="{{ curso.nome }}">
+            {% if curso.imagem %}<img src="{{ curso.imagem.url }}" alt="{{ curso.nome }}">{% endif %}
             <p>{{ curso.professor }}</p>
         </header>
         <section>
