@@ -1,150 +1,114 @@
-*, *::before, *::after {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     background: #e6ebf2;
+    color: #111827;
+    line-height: 1.5;
 }
 
 body > header {
     background: #1f2937;
     color: white;
-    padding: 1.5rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    padding: 20px 40px;
 }
 
 body > header h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 26px;
 }
 
-nav {
-    display: flex;
-    gap: 1.5rem;
+body > header nav {
+    margin-top: 10px;
 }
 
-nav a {
+body > header nav a {
     color: #d1d5db;
+    margin-right: 20px;
     text-decoration: none;
     font-weight: 500;
 }
 
-nav a:hover {
+body > header nav a:hover {
     color: white;
 }
 
 main {
     max-width: 1100px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-main > h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #1f2937;
+h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
 }
 
-main > section {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-article {
+section > article {
     background: white;
+    padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #d1d5db;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+    margin-bottom: 20px;
 }
 
-article:hover {
+section > article:hover {
     transform: translateY(-6px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.18);
 }
 
 article > header {
-    padding: 1.25rem 1.5rem 1rem;
+    margin-bottom: 12px;
 }
 
-article > header h3 {
-    font-size: 1.1rem;
+article > header > h3 {
+    font-size: 20px;
     font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 0.75rem;
+    margin-bottom: 4px;
 }
 
-article > header img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
-}
-
-article > header p {
-    color: #6b7280;
-    font-size: 0.9rem;
-}
-
-article > section {
-    padding: 1rem 1.5rem 1.25rem;
-    border-top: 1px solid #f3f4f6;
-}
-
-article > section h4 {
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #9ca3af;
-    margin-bottom: 0.75rem;
-}
-
-article > section ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-article > section ul li {
-    font-size: 0.875rem;
+article > header > p {
+    font-size: 14px;
     color: #374151;
 }
 
-article > section ul li.badge,
-article > section ul li span.badge {
+article > section {
+    margin-top: 10px;
+}
+
+article > section > h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+
+article > section > ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+article > section > ul > li {
     background: #2563eb;
     color: white;
+    padding: 6px 10px;
     border-radius: 999px;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.8rem;
+    font-size: 13px;
     font-weight: 500;
 }
 
-article > section ul li a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-article > section ul li a:hover {
-    text-decoration: underline;
-}
-
-body > footer {
+footer {
+    text-align: center;
+    padding: 25px;
     background: #1f2937;
     color: #9ca3af;
-    text-align: center;
-    padding: 1.25rem;
-    margin-top: 3rem;
-    font-size: 0.875rem;
+    margin-top: 40px;
 }
