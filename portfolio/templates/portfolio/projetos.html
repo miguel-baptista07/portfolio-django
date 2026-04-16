@@ -1,0 +1,29 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Projetos</h2>
+
+<section>
+    {% for projeto in projetos %}
+    <article>
+        <header>
+            <h3>{{ projeto.titulo }}</h3>
+            <p>{{ projeto.uc }}</p>
+        </header>
+
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tecnologia in projeto.tecnologias.all %}
+                    <li>{{ tecnologia.nome }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        {% if projeto.url_github %}
+        <p><a href="{{ projeto.url_github }}">GitHub</a></p>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
