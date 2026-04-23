@@ -7,10 +7,15 @@
     {% for formacao in formacoes %}
     <article>
         <header>
-            <h3>{{ formacao.titulo }}</h3>
+            <h3><a href="{% url 'formacao' formacao.id %}">{{ formacao.titulo }}</a></h3>
             <p>{{ formacao.instituicao }} — {{ formacao.tipo }}</p>
         </header>
+
+        <p><a href="{% url 'edita_formacao' formacao.id %}">Editar</a></p>
+        <p><a href="{% url 'apaga_formacao' formacao.id %}">Apagar</a></p>
     </article>
     {% endfor %}
 </section>
+
+<p><a href="{% url 'nova_formacao' %}">Nova Formação</a></p>
 {% endblock %}

@@ -7,7 +7,7 @@
     {% for tecnologia in tecnologias %}
     <article>
         <header>
-            <h3>{{ tecnologia.nome }}</h3>
+            <h3><a href="{% url 'tecnologia' tecnologia.id %}">{{ tecnologia.nome }}</a></h3>
             <p>{{ tecnologia.categoria }}</p>
         </header>
 
@@ -15,7 +15,12 @@
             <h4>Nível de interesse</h4>
             <p>{{ tecnologia.nivel_interesse }}</p>
         </section>
+
+        <p><a href="{% url 'edita_tecnologia' tecnologia.id %}">Editar</a></p>
+        <p><a href="{% url 'apaga_tecnologia' tecnologia.id %}">Apagar</a></p>
     </article>
     {% endfor %}
 </section>
+
+<p><a href="{% url 'nova_tecnologia' %}">Nova Tecnologia</a></p>
 {% endblock %}

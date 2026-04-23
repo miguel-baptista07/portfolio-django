@@ -7,7 +7,7 @@
     {% for competencia in competencias %}
     <article>
         <header>
-            <h3>{{ competencia.nome }}</h3>
+            <h3><a href="{% url 'competencia' competencia.id %}">{{ competencia.nome }}</a></h3>
             <p>{{ competencia.nivel }} — {{ competencia.categoria }}</p>
         </header>
 
@@ -19,7 +19,12 @@
                 {% endfor %}
             </ul>
         </section>
+
+        <p><a href="{% url 'edita_competencia' competencia.id %}">Editar</a></p>
+        <p><a href="{% url 'apaga_competencia' competencia.id %}">Apagar</a></p>
     </article>
     {% endfor %}
 </section>
+
+<p><a href="{% url 'nova_competencia' %}">Nova Competência</a></p>
 {% endblock %}

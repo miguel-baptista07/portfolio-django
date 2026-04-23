@@ -7,7 +7,7 @@
     {% for projeto in projetos %}
     <article>
         <header>
-            <h3>{{ projeto.titulo }}</h3>
+            <h3><a href="{% url 'projeto' projeto.id %}">{{ projeto.titulo }}</a></h3>
             <p>{{ projeto.uc }}</p>
         </header>
 
@@ -23,7 +23,12 @@
         {% if projeto.url_github %}
         <p><a href="{{ projeto.url_github }}">GitHub</a></p>
         {% endif %}
+
+        <p><a href="{% url 'edita_projeto' projeto.id %}">Editar</a></p>
+        <p><a href="{% url 'apaga_projeto' projeto.id %}">Apagar</a></p>
     </article>
     {% endfor %}
 </section>
+
+<p><a href="{% url 'novo_projeto' %}">Novo Projeto</a></p>
 {% endblock %}
