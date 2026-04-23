@@ -1,9 +1,14 @@
 from django.contrib import admin
 from .models import (
-    Licenciatura, Docente, Tecnologia, UnidadeCurricular,
+    Licenciatura, Docente, Tecnologia, TipoTecnologia, UnidadeCurricular,
     Projeto, Competencia, Formacao, Certificado,
     MakingOf, TFC,
 )
+
+
+@admin.register(TipoTecnologia)
+class TipoTecnologiaAdmin(admin.ModelAdmin):
+    list_display = ['nome']
 
 
 @admin.register(Licenciatura)

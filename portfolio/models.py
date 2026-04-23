@@ -34,6 +34,18 @@ class Docente(models.Model):
         ordering = ['nome']
 
 
+class TipoTecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = 'Tipo de Tecnologia'
+        verbose_name_plural = 'Tipos de Tecnologias'
+        ordering = ['nome']
+
+
 class Tecnologia(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField(blank=True)
@@ -42,6 +54,7 @@ class Tecnologia(models.Model):
     categoria = models.CharField(max_length=100, blank=True)
     nivel_interesse = models.IntegerField(default=3)
     pontos_destaque = models.TextField(blank=True)
+    tipo = models.ForeignKey(TipoTecnologia, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.nome
