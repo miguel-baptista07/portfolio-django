@@ -1,0 +1,14 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>{{ tecnologia.nome }}</h2>
+
+<p>{{ tecnologia.categoria }}</p>
+
+<p>{{ tecnologia.nivel_interesse }}</p>
+
+<p>{{ tecnologia.pontos_destaque }}</p>
+
+<p><a href="{% url 'edita_tecnologia' tecnologia.id %}">Editar</a></p>
+<p><a href="{% url 'apaga_tecnologia' tecnologia.id %}">Apagar</a></p>
+{% endblock %}

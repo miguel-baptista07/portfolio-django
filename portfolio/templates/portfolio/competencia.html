@@ -1,0 +1,21 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>{{ competencia.nome }}</h2>
+
+<p>{{ competencia.nivel }} - {{ competencia.categoria }}</p>
+
+<p>{{ competencia.descricao }}</p>
+
+<section>
+    <h3>Tecnologias</h3>
+    <ul>
+        {% for tecnologia in competencia.tecnologias.all %}
+            <li>{{ tecnologia.nome }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<p><a href="{% url 'edita_competencia' competencia.id %}">Editar</a></p>
+<p><a href="{% url 'apaga_competencia' competencia.id %}">Apagar</a></p>
+{% endblock %}

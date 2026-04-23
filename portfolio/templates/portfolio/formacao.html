@@ -1,0 +1,12 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>{{ formacao.titulo }}</h2>
+
+<p>{{ formacao.instituicao }} - {{ formacao.tipo }}</p>
+
+<p>{{ formacao.data_inicio }} - {{ formacao.data_fim }}</p>
+
+<p><a href="{% url 'edita_formacao' formacao.id %}">Editar</a></p>
+<p><a href="{% url 'apaga_formacao' formacao.id %}">Apagar</a></p>
+{% endblock %}
