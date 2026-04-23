@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Licenciatura, UnidadeCurricular, Projeto, Tecnologia, TFC, Competencia, Formacao
+from .forms import ProjetoForm
 
 
 def licenciaturas_view(request):
@@ -35,3 +36,33 @@ def competencias_view(request):
 def formacoes_view(request):
     formacoes = Formacao.objects.all()
     return render(request, 'portfolio/formacoes.html', {'formacoes': formacoes})
+
+
+def projeto_view(request, id):
+    projeto = Projeto.objects.get(id=id)
+    return render(request, 'portfolio/projeto.html', {'projeto': projeto})
+
+
+def novo_projeto_view(request):
+    form = ProjetoForm(request.POST or None, request.FILES)
+    if form.is_valid():
+        form.save()
+        return redirect('projetos')
+    return render(request, 'portfolio/novo_projeto.html', {'form': form})
+
+
+def edita_projeto_view(request, id):
+    projeto = Projeto.objects.get(id=id)
+    if request.POST:
+        form = ProjetoForm(request.POST or None, request.FILES, instance=projeto)
+        if form.is_valid():
+            form.save()
+            return redirect('projetos')
+    else:
+        form = ProjetoForm(instance=projeto)
+    return render(request, 'portfolio/edita_projeto.html', {'form': form, 'projeto': projeto})
+
+
+def apaga_projeto_view(request, id):
+    Projeto.objects.get(id=id).delete()
+    return redirect('projetos')
