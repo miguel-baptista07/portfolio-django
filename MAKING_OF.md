@@ -55,7 +55,7 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 
 ### 5. Tecnologia
 **Decisão 1 — Incluir `nivel_interesse` (1-5):** Permite mostrar as tecnologias favoritas de forma simples e visual.  
-**Decisão 2 — Incluir `categoria`:** Agrupa tecnologias por tipo (Linguagem, Frontend, etc.) para facilitar a navegação.  
+**Decisão 2 — Criar entidade `TipoTecnologia` (FK):** Na Ficha 8 substituí o campo `categoria` (CharField) por uma FK para `TipoTecnologia`. Isto permite agrupar tecnologias dinamicamente e adicionar novos tipos sem alterar o modelo.  
 **Decisão 3 — Incluir `pontos_destaque`:** Permite destacar o que foi mais marcante na aprendizagem de cada tecnologia.
 
 ### 6. TFC
@@ -81,6 +81,27 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 
 ---
 
+## Ficha 8 — Formulários CRUD e Página Sobre
+
+### Formulários CRUD
+**Decisão 1 — Usar `ModelForm` com `fields = '__all__'`:** O Django gera automaticamente todos os campos do modelo no formulário. Simples e eficiente para um portfolio pessoal onde não há necessidade de restringir campos.  
+**Decisão 2 — Botões por cor:** Editar (azul), Apagar (vermelho), Novo (verde). Convenção visual intuitiva e comum em aplicações web.  
+**O que gostei:** A simplicidade do Django Forms surpreendeu-me — com poucas linhas de código é possível criar formulários funcionais com validação automática.  
+**O que não gostei:** O estilo padrão do `form.as_p` é muito básico e requer CSS adicional para ficar apresentável.
+
+### Entidade TipoTecnologia (nova — Ficha 8)
+**Justificação:** O enunciado da Ficha 8 pede para estruturar as tecnologias por tipos (Frontend, Backend, Base de Dados, Storage, Outros). Criei a entidade `TipoTecnologia` com uma relação FK para `Tecnologia`.  
+**Decisão 1 — FK em vez de CharField:** Permite adicionar novos tipos sem alterar o código, e agrupa as tecnologias dinamicamente na página Sobre.  
+**Decisão 2 — Cinco tipos:** Frontend, Backend, Base de Dados, Storage e Outros — cobre todas as tecnologias usadas e deixa espaço para crescer nas próximas fichas.  
+**Commit:** `ab74b49` — "Tecnologia: adicionado modelo TipoTecnologia e FK tipo" — 24 Abril 2026
+
+### Página Sobre
+**Decisão 1 — Fotografias do papel:** Incluí as fotos do diagrama MVT e do mapa de navegação desenhados à mão, conforme pedido no enunciado.  
+**Decisão 2 — Tecnologias agrupadas por tipo:** A página Sobre usa `prefetch_related('tecnologia_set')` para mostrar as tecnologias organizadas por tipo, sem consultas extra à base de dados.  
+**Decisão 3 — django-markdownify:** Instalado para renderizar os campos `pontos_destaque` e `decisoes_tomadas` com formatação Markdown.
+
+---
+
 ## Erros Encontrados e Correções
 
 | # | Erro | Correção |
@@ -91,6 +112,8 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 | 4 | Nomes dos docentes sem acentos por encoding no Windows | Script corrigido com `io.TextIOWrapper` e `encoding='utf-8'` |
 | 5 | `uso_ia` removido do MakingOf por engano | Campo reposto após revisão do enunciado |
 | 6 | Push feito para o repositório errado | Remote corrigido e push para repositório correto |
+| 7 | Foto do DER não aparecia na página Sobre | Caminho corrigido para `/media/makingof/DER-_portfolio.jpeg` |
+| 8 | Tecnologias Django, Python e Git sem tipo associado | Associadas via shell ao tipo correto após criação do TipoTecnologia |
 
 ---
 
