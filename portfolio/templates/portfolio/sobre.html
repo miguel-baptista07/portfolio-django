@@ -28,7 +28,7 @@
             <ul>
             {% for tecnologia in tipo.tecnologia_set.all %}
                 <li>
-                    <strong>{{ tecnologia.nome }}</strong> — {{ tecnologia.descricao }}
+                    <strong>{{ tecnologia.nome }}</strong>{% if tecnologia.descricao %} — {{ tecnologia.descricao }}{% endif %}
                     {{ tecnologia.pontos_destaque|markdownify }}
                 </li>
             {% endfor %}
