@@ -21,14 +21,14 @@
         </section>
 
         {% if projeto.url_github %}
-        <p><a href="{{ projeto.url_github }}">GitHub</a></p>
+        <p><a href="{{ projeto.url_github }}" class="btn-novo" target="_blank">GitHub</a></p>
         {% endif %}
 
-        <p><a href="{% url 'edita_projeto' projeto.id %}">Editar</a></p>
-        <p><a href="{% url 'apaga_projeto' projeto.id %}">Apagar</a></p>
+        <a href="{% url 'edita_projeto' projeto.id %}" class="btn-editar">Editar</a>
+        <a href="{% url 'apaga_projeto' projeto.id %}" class="btn-apagar">Apagar</a>
     </article>
     {% endfor %}
 </section>
 
-<p><a href="{% url 'novo_projeto' %}">Novo Projeto</a></p>
+<a href="{% url 'novo_projeto' %}" class="btn-novo">+ Novo Projeto</a>
 {% endblock %}

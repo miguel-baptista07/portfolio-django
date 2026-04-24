@@ -16,11 +16,11 @@
             <p>{{ tecnologia.nivel_interesse }}</p>
         </section>
 
-        <p><a href="{% url 'edita_tecnologia' tecnologia.id %}">Editar</a></p>
-        <p><a href="{% url 'apaga_tecnologia' tecnologia.id %}">Apagar</a></p>
+        <a href="{% url 'edita_tecnologia' tecnologia.id %}" class="btn-editar">Editar</a>
+        <a href="{% url 'apaga_tecnologia' tecnologia.id %}" class="btn-apagar">Apagar</a>
     </article>
     {% endfor %}
 </section>
 
-<p><a href="{% url 'nova_tecnologia' %}">Nova Tecnologia</a></p>
+<a href="{% url 'nova_tecnologia' %}" class="btn-novo">+ Nova Tecnologia</a>
 {% endblock %}

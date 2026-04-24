@@ -1,44 +1,56 @@
 {% extends "portfolio/base.html" %}
+{% load static %}
 {% load markdownify %}
 
 {% block content %}
+<h2>Sobre este Portfolio</h2>
+
 <section>
-    <h2>Arquitetura MVT</h2>
-    <p>O padrão MVT (Model-View-Template) utilizado pelo Django organiza o código em três componentes: o Model define a estrutura dos dados e interage com a base de dados; a View contém a lógica de negócio, recebe os pedidos HTTP e devolve respostas; o Template define a apresentação HTML renderizada com os dados fornecidos pela View. O fluxo de informação começa no pedido HTTP do utilizador, passa pela View que consulta os Models necessários e termina com a renderização do Template com os dados obtidos.</p>
-    <img src="/media/makingof/DER-_portfolio.jpeg" alt="Diagrama MVT">
+    <h3>Arquitetura MVT</h3>
+    <p>Este portfolio foi desenvolvido em Django, seguindo o padrão MVT (Model-View-Template). O <strong>Model</strong> define a estrutura dos dados e interage com a base de dados SQLite. A <strong>View</strong> contém a lógica de negócio — recebe pedidos HTTP, consulta os modelos necessários e devolve uma resposta. O <strong>Template</strong> define a apresentação HTML, recebendo os dados da View e renderizando-os para o utilizador.</p>
+    <img src="{% static 'portfolio/mvt.png' %}" alt="Diagrama MVT" style="max-width:500px; display:block; margin:16px auto; border-radius:12px;" onerror="this.style.display='none'">
 </section>
 
 <section>
-    <h2>Modelação</h2>
-    <p>O Diagrama de Entidade-Relacionamento (DER) representa a estrutura de dados do portfolio, com as entidades principais e as suas relações. O modelo inclui entidades como Projeto, Tecnologia, Competência, Formação e Unidade Curricular, interligadas através de relações de chave estrangeira e muitos-para-muitos.</p>
-    <img src="/media/makingof/DER-%20portfolio.jpeg" alt="DER do Portfolio">
+    <h3>Modelação — Diagrama Entidade-Relação</h3>
+    <p>O DER abaixo representa a estrutura de dados do portfolio, com as entidades principais e as suas relações. O modelo inclui entidades como Projeto, Tecnologia, Competência, Formação e Unidade Curricular, interligadas através de relações de chave estrangeira e muitos-para-muitos.</p>
+    <img src="/media/makingof/DER- portfolio.jpeg" alt="DER do Portfolio" style="max-width:600px; display:block; margin:16px auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
 </section>
 
 <section>
-    <h2>Tecnologias</h2>
+    <h3>Tecnologias utilizadas</h3>
     {% for tecnologia in tecnologias %}
-    <section>
-        <h3>{{ tecnologia.nome }}</h3>
-        <p>{{ tecnologia.categoria }}</p>
-        <p>{{ tecnologia.descricao }}</p>
-        {{ tecnologia.pontos_destaque|markdownify }}
-    </section>
+    <article>
+        <header>
+            <h4>{{ tecnologia.nome }}</h4>
+            <p>{{ tecnologia.categoria }}</p>
+        </header>
+        <section>
+            <p>{{ tecnologia.descricao }}</p>
+            {{ tecnologia.pontos_destaque|markdownify }}
+        </section>
+    </article>
     {% endfor %}
 </section>
 
 <section>
-    <h2>Repositório GitHub</h2>
-    <p><a href="https://github.com/miguel-baptista07/portfolio-django">github.com/miguel-baptista07/portfolio-django</a></p>
-    <p>O Git permite controlo de versões distribuído, facilitando o desenvolvimento colaborativo e individual através de branches, commits e histórico completo de alterações. Permite reverter erros, experimentar funcionalidades em branches separadas sem afetar o código principal e sincronizar o trabalho entre diferentes dispositivos. O GitHub acrescenta uma camada de colaboração e visibilidade, servindo como portfólio de código para recrutadores e facilitando a revisão de código por pares.</p>
+    <h3>Repositório GitHub</h3>
+    <p>O código fonte deste portfolio está disponível publicamente no GitHub. O Git foi fundamental no desenvolvimento — permitiu fazer commits regulares de cada funcionalidade, reverter erros, manter um histórico claro do progresso e sincronizar entre o ambiente local e o Codespace.</p>
+    <a href="https://github.com/miguel-baptista07/portfolio-django" class="btn-novo" target="_blank">Ver repositório no GitHub</a>
 </section>
 
 <section>
-    <h2>Making Of</h2>
+    <h3>Making Of</h3>
+    <p>Registo do processo de modelação e desenvolvimento de cada entidade.</p>
     {% for item in makingof %}
     <article>
-        <h3>{{ item.titulo }}</h3>
-        <p>{{ item.entidade_relacionada }}</p>
-        {{ item.decisoes_tomadas|markdownify }}
+        <header>
+            <h4>{{ item.titulo }}</h4>
+            <p>{{ item.entidade_relacionada }}</p>
+        </header>
+        <section>
+            {{ item.decisoes_tomadas|markdownify }}
+        </section>
     </article>
     {% endfor %}
 </section>

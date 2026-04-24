@@ -20,11 +20,11 @@
             </ul>
         </section>
 
-        <p><a href="{% url 'edita_competencia' competencia.id %}">Editar</a></p>
-        <p><a href="{% url 'apaga_competencia' competencia.id %}">Apagar</a></p>
+        <a href="{% url 'edita_competencia' competencia.id %}" class="btn-editar">Editar</a>
+        <a href="{% url 'apaga_competencia' competencia.id %}" class="btn-apagar">Apagar</a>
     </article>
     {% endfor %}
 </section>
 
-<p><a href="{% url 'nova_competencia' %}">Nova Competência</a></p>
+<a href="{% url 'nova_competencia' %}" class="btn-novo">+ Nova Competência</a>
 {% endblock %}
