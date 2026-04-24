@@ -1,0 +1,45 @@
+{% extends "portfolio/base.html" %}
+{% load markdownify %}
+
+{% block content %}
+<section>
+    <h2>Arquitetura MVT</h2>
+    <p>O padrão MVT (Model-View-Template) utilizado pelo Django organiza o código em três componentes: o Model define a estrutura dos dados e interage com a base de dados; a View contém a lógica de negócio, recebe os pedidos HTTP e devolve respostas; o Template define a apresentação HTML renderizada com os dados fornecidos pela View. O fluxo de informação começa no pedido HTTP do utilizador, passa pela View que consulta os Models necessários e termina com a renderização do Template com os dados obtidos.</p>
+    <img src="/media/makingof/DER-_portfolio.jpeg" alt="Diagrama MVT">
+</section>
+
+<section>
+    <h2>Modelação</h2>
+    <p>O Diagrama de Entidade-Relacionamento (DER) representa a estrutura de dados do portfolio, com as entidades principais e as suas relações. O modelo inclui entidades como Projeto, Tecnologia, Competência, Formação e Unidade Curricular, interligadas através de relações de chave estrangeira e muitos-para-muitos.</p>
+    <img src="/media/makingof/DER-%20portfolio.jpeg" alt="DER do Portfolio">
+</section>
+
+<section>
+    <h2>Tecnologias</h2>
+    {% for tecnologia in tecnologias %}
+    <section>
+        <h3>{{ tecnologia.nome }}</h3>
+        <p>{{ tecnologia.categoria }}</p>
+        <p>{{ tecnologia.descricao }}</p>
+        {{ tecnologia.pontos_destaque|markdownify }}
+    </section>
+    {% endfor %}
+</section>
+
+<section>
+    <h2>Repositório GitHub</h2>
+    <p><a href="https://github.com/miguel-baptista07/portfolio-django">github.com/miguel-baptista07/portfolio-django</a></p>
+    <p>O Git permite controlo de versões distribuído, facilitando o desenvolvimento colaborativo e individual através de branches, commits e histórico completo de alterações. Permite reverter erros, experimentar funcionalidades em branches separadas sem afetar o código principal e sincronizar o trabalho entre diferentes dispositivos. O GitHub acrescenta uma camada de colaboração e visibilidade, servindo como portfólio de código para recrutadores e facilitando a revisão de código por pares.</p>
+</section>
+
+<section>
+    <h2>Making Of</h2>
+    {% for item in makingof %}
+    <article>
+        <h3>{{ item.titulo }}</h3>
+        <p>{{ item.entidade_relacionada }}</p>
+        {{ item.decisoes_tomadas|markdownify }}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

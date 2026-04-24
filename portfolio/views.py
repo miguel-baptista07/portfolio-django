@@ -156,3 +156,10 @@ def edita_formacao_view(request, id):
 def apaga_formacao_view(request, id):
     Formacao.objects.get(id=id).delete()
     return redirect('formacoes')
+
+
+def sobre_view(request):
+    from .models import Tecnologia, MakingOf
+    tecnologias = Tecnologia.objects.select_related('tipo').all()
+    makingof = MakingOf.objects.all()
+    return render(request, 'portfolio/sobre.html', {'tecnologias': tecnologias, 'makingof': makingof})
