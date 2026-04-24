@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Licenciatura, UnidadeCurricular, Projeto, Tecnologia, TFC, Competencia, Formacao
+from .models import Licenciatura, UnidadeCurricular, Projeto, Tecnologia, TFC, Competencia, Formacao, TipoTecnologia, MakingOf
 from .forms import ProjetoForm, TecnologiaForm, CompetenciaForm, FormacaoForm
 
 
@@ -159,7 +159,6 @@ def apaga_formacao_view(request, id):
 
 
 def sobre_view(request):
-    from .models import Tecnologia, MakingOf
-    tecnologias = Tecnologia.objects.select_related('tipo').all()
+    tipos = TipoTecnologia.objects.prefetch_related('tecnologia_set').all()
     makingof = MakingOf.objects.all()
-    return render(request, 'portfolio/sobre.html', {'tecnologias': tecnologias, 'makingof': makingof})
+    return render(request, 'portfolio/sobre.html', {'tipos': tipos, 'makingof': makingof})

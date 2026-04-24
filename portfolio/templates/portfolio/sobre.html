@@ -19,15 +19,20 @@
 
 <section>
     <h3>Tecnologias utilizadas</h3>
-    {% for tecnologia in tecnologias %}
+    {% for tipo in tipos %}
     <article>
         <header>
-            <h4>{{ tecnologia.nome }}</h4>
-            <p>{{ tecnologia.categoria }}</p>
+            <h4>{{ tipo.nome }}</h4>
         </header>
         <section>
-            <p>{{ tecnologia.descricao }}</p>
-            {{ tecnologia.pontos_destaque|markdownify }}
+            <ul>
+            {% for tecnologia in tipo.tecnologia_set.all %}
+                <li>
+                    <strong>{{ tecnologia.nome }}</strong> — {{ tecnologia.descricao }}
+                    {{ tecnologia.pontos_destaque|markdownify }}
+                </li>
+            {% endfor %}
+            </ul>
         </section>
     </article>
     {% endfor %}
