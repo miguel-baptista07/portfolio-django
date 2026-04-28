@@ -1,0 +1,106 @@
+[
+{
+  "model": "escola.professor",
+  "pk": 1,
+  "fields": {
+    "nome": "Lúcio Studer",
+    "email": "lucio.studer@ulht.pt"
+  }
+},
+{
+  "model": "escola.professor",
+  "pk": 2,
+  "fields": {
+    "nome": "Pedro Perdigão",
+    "email": "pedro.perdigao@ulht.pt"
+  }
+},
+{
+  "model": "escola.professor",
+  "pk": 3,
+  "fields": {
+    "nome": "Luís Sousa",
+    "email": "luis.sousa@ulht.pt"
+  }
+},
+{
+  "model": "escola.aluno",
+  "pk": 1,
+  "fields": {
+    "nome": "Miguel Baptista",
+    "numero": 22405192
+  }
+},
+{
+  "model": "escola.aluno",
+  "pk": 2,
+  "fields": {
+    "nome": "Lourenço Madeira",
+    "numero": 22405191
+  }
+},
+{
+  "model": "escola.aluno",
+  "pk": 3,
+  "fields": {
+    "nome": "Gonçalo Gonçalves",
+    "numero": 22405201
+  }
+},
+{
+  "model": "escola.curso",
+  "pk": 1,
+  "fields": {
+    "nome": "Django",
+    "imagem": "cursos/django.png",
+    "professor": 1,
+    "alunos": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "escola.curso",
+  "pk": 2,
+  "fields": {
+    "nome": "Spring Boot",
+    "imagem": "cursos/springboot.png",
+    "professor": 2,
+    "alunos": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "escola.curso",
+  "pk": 3,
+  "fields": {
+    "nome": "Next.js",
+    "imagem": "cursos/next.png",
+    "professor": 1,
+    "alunos": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "escola.curso",
+  "pk": 4,
+  "fields": {
+    "nome": "Vue.js",
+    "imagem": "cursos/vue.png",
+    "professor": 3,
+    "alunos": [
+      1,
+      2,
+      3
+    ]
+  }
+}
+]
