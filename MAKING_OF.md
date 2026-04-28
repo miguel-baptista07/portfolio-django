@@ -24,9 +24,9 @@ O projeto consiste numa aplicação web Django que serve como portfolio académi
 
 O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fotografia encontra-se em `media/makingof/DER-portfolio.jpeg`.
 
-![DER desenhado à mão](media/makingof/DER-%20portfolio.jpeg)
 
-![DER desenhado à mão](media/makingof/DER-%20portfolio.jpeg)
+
+![DER desenhado à mão](media/makingof/DER-_portfolio.jpeg)
 
 ---
 
@@ -44,11 +44,11 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 
 ### 3. Docente
 **Decisão 1 — Incluir `url_lusofona`:** O enunciado especifica explicitamente a ligação à página pessoal no site da Lusófona.  
-**Decisão 2 — Incluir `foto`:** Humaniza o portfolio. Campo opcional para não obrigar a ter foto de todos os docentes.
+**Decisão 2 — Incluir `foto`:** Campo opcional para não obrigar a ter foto de todos os docentes.
 
 ### 4. Projeto
 **Decisão 1 — Incluir `url_github`:** O enunciado destaca que é muito importante para entrevistas de emprego.  
-**Decisão 2 — Incluir `conceitos_aplicados`:** Mostra o que foi aprendido em cada projeto — o que um recrutador quer saber.  
+**Decisão 2 — Incluir `conceitos_aplicados`:** Mostra o que foi aprendido em cada projeto, o que um recrutador quer saber.  
 **Decisão 3 — Incluir `data_inicio` e `data_fim`:** Permitem ordenar cronologicamente e mostrar a evolução ao longo do curso.  
 **Decisão 4 — FK para UnidadeCurricular:** Contextualiza o projeto académico e mostra a progressão ao longo do curso.  
 **Fonte dos dados:** Os projetos incluídos foram retirados do meu portfolio pessoal em https://miguel-baptista-plum.vercel.app/ — são projetos reais que desenvolvi ao longo do curso e que já estavam documentados no meu site pessoal.
@@ -86,10 +86,10 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 ### Formulários CRUD
 **Decisão 1 — Usar `ModelForm` com `fields = '__all__'`:** O Django gera automaticamente todos os campos do modelo no formulário. Simples e eficiente para um portfolio pessoal onde não há necessidade de restringir campos.  
 **Decisão 2 — Botões por cor:** Editar (azul), Apagar (vermelho), Novo (verde). Convenção visual intuitiva e comum em aplicações web.  
-**O que gostei:** A simplicidade do Django Forms surpreendeu-me — com poucas linhas de código é possível criar formulários funcionais com validação automática.  
+**O que gostei:** A simplicidade do Django Forms surpreendeu-me, com poucas linhas de código é possível criar formulários funcionais com validação automática.  
 **O que não gostei:** O estilo padrão do `form.as_p` é muito básico e requer CSS adicional para ficar apresentável.
 
-### Entidade TipoTecnologia (nova — Ficha 8)
+### Entidade TipoTecnologia (nova - Ficha 8)
 **Justificação:** O enunciado da Ficha 8 pede para estruturar as tecnologias por tipos (Frontend, Backend, Base de Dados, Storage, Outros). Criei a entidade `TipoTecnologia` com uma relação FK para `Tecnologia`.  
 **Decisão 1 — FK em vez de CharField:** Permite adicionar novos tipos sem alterar o código, e agrupa as tecnologias dinamicamente na página Sobre.  
 **Decisão 2 — Cinco tipos:** Frontend, Backend, Base de Dados, Storage e Outros — cobre todas as tecnologias usadas e deixa espaço para crescer nas próximas fichas.  
@@ -99,6 +99,11 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 **Decisão 1 — Fotografias do papel:** Incluí as fotos do diagrama MVT e do mapa de navegação desenhados à mão, conforme pedido no enunciado.  
 **Decisão 2 — Tecnologias agrupadas por tipo:** A página Sobre usa `prefetch_related('tecnologia_set')` para mostrar as tecnologias organizadas por tipo, sem consultas extra à base de dados.  
 **Decisão 3 — django-markdownify:** Instalado para renderizar os campos `pontos_destaque` e `decisoes_tomadas` com formatação Markdown.
+
+### Vídeo-tutorial
+**Decisão 1 — Gravar demonstração completa:** Gravei um vídeo de 5 minutos a explicar todos os ficheiros envolvidos na criação de uma página com formulário (models.py, forms.py, urls.py, views.py, template) e a demonstração em funcionamento no browser.  
+**Decisão 2 — Incorporar na página Sobre:** O vídeo está incorporado via iframe na secção "Arquitetura MVT" da página Sobre, conforme pedido no enunciado.  
+**Link:** https://youtu.be/oDEnLL46uzY
 
 ---
 
@@ -110,10 +115,9 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 | 2 | Modelos não guardados corretamente após prompts iniciais | Recriação de todos os modelos conforme o DER |
 | 3 | Campo `decisoes_tomadas` sem `blank=True` impediu migração | Adicionado `default=''` temporariamente |
 | 4 | Nomes dos docentes sem acentos por encoding no Windows | Script corrigido com `io.TextIOWrapper` e `encoding='utf-8'` |
-| 5 | `uso_ia` removido do MakingOf por engano | Campo reposto após revisão do enunciado |
-| 6 | Push feito para o repositório errado | Remote corrigido e push para repositório correto |
-| 7 | Foto do DER não aparecia na página Sobre | Caminho corrigido para `/media/makingof/DER-_portfolio.jpeg` |
-| 8 | Tecnologias Django, Python e Git sem tipo associado | Associadas via shell ao tipo correto após criação do TipoTecnologia |
+| 5 | Push feito para o repositório errado | Remote corrigido e push para repositório correto |
+| 6 | Foto do DER não aparecia na página Sobre | Caminho corrigido para `/media/makingof/DER-_portfolio.jpeg` |
+| 7 | Tecnologias Django, Python e Git sem tipo associado | Associadas via shell ao tipo correto após criação do TipoTecnologia |
 
 ---
 
