@@ -1,0 +1,60 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<article>
+    <header>
+        <h2>{{ artigo.titulo }}</h2>
+        <p>por {{ artigo.autor.username }} em {{ artigo.data_criacao|date:"d/m/Y" }}</p>
+    </header>
+
+    {% if artigo.fotografia %}
+    <figure>
+        <img src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}">
+    </figure>
+    {% endif %}
+
+    <p>{{ artigo.texto }}</p>
+
+    {% if artigo.link_externo %}
+    <p><a href="{{ artigo.link_externo }}" target="_blank">Link externo</a></p>
+    {% endif %}
+
+    {% if request.user.is_authenticated and request.user == artigo.autor %}
+    <p><a href="{% url 'edita_artigo' artigo.id %}" class="btn-editar">Editar</a></p>
+    {% endif %}
+
+    <section>
+        <h3>Gostos ({{ artigo.likes.count }})</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="like">Gosto</button>
+        </form>
+    </section>
+
+    <section>
+        <h3>Comentários</h3>
+        {% for comentario in artigo.comentarios.all %}
+        <article>
+            <header>
+                <strong>{{ comentario.autor.username }}</strong>
+                <time>{{ comentario.data|date:"d/m/Y H:i" }}</time>
+            </header>
+            <p>{{ comentario.texto }}</p>
+        </article>
+        {% empty %}
+        <p>Ainda não há comentários.</p>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+        <h4>Adicionar comentário</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form_comentario.as_p }}
+            <button type="submit" name="comentario">Comentar</button>
+        </form>
+        {% else %}
+        <p><a href="{% url 'login' %}">Inicia sessão</a> para comentar.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}

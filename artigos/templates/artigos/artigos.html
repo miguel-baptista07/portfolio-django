@@ -1,0 +1,38 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Artigos</h2>
+
+{% if is_autor %}
+<p><a href="{% url 'novo_artigo' %}" class="btn-novo">+ Novo Artigo</a></p>
+{% endif %}
+
+<section>
+    {% for artigo in artigos %}
+    <article>
+        <header>
+            <h3><a href="{% url 'artigo' artigo.id %}">{{ artigo.titulo }}</a></h3>
+            <p>por {{ artigo.autor.username }} em {{ artigo.data_criacao|date:"d/m/Y" }}</p>
+        </header>
+
+        {% if artigo.fotografia %}
+        <figure>
+            <img src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}">
+        </figure>
+        {% endif %}
+
+        <p>{{ artigo.texto|truncatewords:30 }}</p>
+
+        <footer>
+            <span>{{ artigo.likes.count }} gosto(s)</span>
+            <span>{{ artigo.comentarios.count }} comentário(s)</span>
+            {% if artigo.link_externo %}
+            <a href="{{ artigo.link_externo }}" target="_blank">Link externo</a>
+            {% endif %}
+        </footer>
+    </article>
+    {% empty %}
+    <p>Ainda não há artigos.</p>
+    {% endfor %}
+</section>
+{% endblock %}

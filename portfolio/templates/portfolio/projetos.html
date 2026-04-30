@@ -24,11 +24,15 @@
         <p><a href="{{ projeto.url_github }}" class="btn-novo" target="_blank">GitHub</a></p>
         {% endif %}
 
+        {% if is_gestor %}
         <a href="{% url 'edita_projeto' projeto.id %}" class="btn-editar">Editar</a>
         <a href="{% url 'apaga_projeto' projeto.id %}" class="btn-apagar">Apagar</a>
+        {% endif %}
     </article>
     {% endfor %}
 </section>
 
+{% if is_gestor %}
 <a href="{% url 'novo_projeto' %}" class="btn-novo">+ Novo Projeto</a>
+{% endif %}
 {% endblock %}

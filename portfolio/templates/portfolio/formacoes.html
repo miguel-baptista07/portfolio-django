@@ -11,11 +11,15 @@
             <p>{{ formacao.instituicao }} — {{ formacao.tipo }}</p>
         </header>
 
+        {% if is_gestor %}
         <a href="{% url 'edita_formacao' formacao.id %}" class="btn-editar">Editar</a>
         <a href="{% url 'apaga_formacao' formacao.id %}" class="btn-apagar">Apagar</a>
+        {% endif %}
     </article>
     {% endfor %}
 </section>
 
+{% if is_gestor %}
 <a href="{% url 'nova_formacao' %}" class="btn-novo">+ Nova Formação</a>
+{% endif %}
 {% endblock %}

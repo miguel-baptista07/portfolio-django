@@ -20,11 +20,15 @@
             </ul>
         </section>
 
+        {% if is_gestor %}
         <a href="{% url 'edita_competencia' competencia.id %}" class="btn-editar">Editar</a>
         <a href="{% url 'apaga_competencia' competencia.id %}" class="btn-apagar">Apagar</a>
+        {% endif %}
     </article>
     {% endfor %}
 </section>
 
+{% if is_gestor %}
 <a href="{% url 'nova_competencia' %}" class="btn-novo">+ Nova Competência</a>
+{% endif %}
 {% endblock %}

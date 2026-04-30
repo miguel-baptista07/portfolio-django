@@ -16,11 +16,15 @@
             <p>{{ tecnologia.nivel_interesse }}</p>
         </section>
 
+        {% if is_gestor %}
         <a href="{% url 'edita_tecnologia' tecnologia.id %}" class="btn-editar">Editar</a>
         <a href="{% url 'apaga_tecnologia' tecnologia.id %}" class="btn-apagar">Apagar</a>
+        {% endif %}
     </article>
     {% endfor %}
 </section>
 
+{% if is_gestor %}
 <a href="{% url 'nova_tecnologia' %}" class="btn-novo">+ Nova Tecnologia</a>
+{% endif %}
 {% endblock %}

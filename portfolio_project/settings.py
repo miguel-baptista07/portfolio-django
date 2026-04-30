@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portfolio',
     'escola',
+    'accounts',
+    'artigos',
     'markdownify.apps.MarkdownifyConfig',
 ]
+
+LOGIN_URL = '/accounts/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,3 +143,5 @@ MARKDOWNIFY = {
         ]
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
