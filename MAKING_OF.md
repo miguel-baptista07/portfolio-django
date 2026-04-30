@@ -105,6 +105,25 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 **Decisão 2 — Incorporar na página Sobre:** O vídeo está incorporado via iframe na secção "Arquitetura MVT" da página Sobre, conforme pedido no enunciado.  
 **Link:** https://youtu.be/oDEnLL46uzY
 
+## Ficha 9 — Autenticação e Artigos
+
+### App Accounts — Autenticação por Senha
+**Decisão 1 — App separada `accounts`:** Separei a autenticação numa app própria para manter o código organizado e reutilizável.  
+**Decisão 2 — `UserCreationForm`:** Usei o formulário padrão do Django para o registo, aproveitando a validação automática de passwords.  
+**Decisão 3 — Grupo `gestor-portfolio`:** Apenas utilizadores deste grupo veem os botões de editar/apagar/criar nas páginas CRUD. A verificação é feita na view (passando `is_gestor` no context) em vez do template, porque os templates Django não suportam chamadas de método com parâmetros.  
+**Decisão 4 — `@login_required`:** Adicionado como segurança extra nas views CRUD para impedir acesso direto via URL.
+
+### Autenticação por Link Mágico
+**Decisão 1 — Modelo `MagicToken`:** Criei um modelo com UUID único, data de criação e flag `usado`, com validade de 15 minutos.  
+**Decisão 2 — `EMAIL_BACKEND = console`:** Em desenvolvimento o email aparece no terminal em vez de ser enviado, permitindo testar sem configurar SMTP.  
+**Decisão 3 — Integração na página de login:** O link mágico aparece como alternativa na página de login principal.
+
+### App Artigos
+**Decisão 1 — Modelo `Artigo` com FK para `User`:** O autor fica associado ao utilizador Django, permitindo que cada autor só edite os seus próprios artigos.  
+**Decisão 2 — Likes por IP:** Usei o IP do utilizador como identificador para likes, evitando autenticação obrigatória para gostar de um artigo.  
+**Decisão 3 — Comentários só para autenticados:** Segue o requisito do enunciado — qualquer pessoa vê os artigos, mas só utilizadores com conta podem comentar.  
+**Decisão 4 — Grupo `autores`:** Utilizadores registados são automaticamente adicionados ao grupo autores, com permissão para criar e editar artigos.
+
 ---
 
 ## Erros Encontrados e Correções
@@ -118,7 +137,8 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 | 5 | Push feito para o repositório errado | Remote corrigido e push para repositório correto |
 | 6 | Foto do DER não aparecia na página Sobre | Caminho corrigido para `/media/makingof/DER-_portfolio.jpeg` |
 | 7 | Tecnologias Django, Python e Git sem tipo associado | Associadas via shell ao tipo correto após criação do TipoTecnologia |
-
+| 8 | Templates Django não suportam `.filter().exists()` em `{% if %}` | Verificação movida para a view, passando `is_gestor` e `is_autor` no context |
+| 9 | Utilizadores `gestor` e `pw25profs` com `is_active=False` | Corrigido via shell com `update(is_active=True)` |
 ---
 
 ## Uso de Inteligência Artificial
