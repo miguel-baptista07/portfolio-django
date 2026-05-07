@@ -8,7 +8,7 @@
 <section>
     <h3>Arquitetura MVT</h3>
     <p>Este portfolio foi desenvolvido em Django, seguindo o padrão MVT (Model-View-Template). O <strong>Model</strong> define a estrutura dos dados e interage com a base de dados SQLite. A <strong>View</strong> contém a lógica de negócio: recebe pedidos HTTP, consulta os modelos necessários e devolve uma resposta. O <strong>Template</strong> define a apresentação HTML, recebendo os dados da View e renderizando-os para o utilizador.</p>
-    <img src="/media/makingof/Arquitetura.png" alt="Diagrama MVT desenhado à mão" style="max-width:500px; display:block; margin:16px auto; border-radius:12px;">
+    {% for item in makingof %}{% if item.foto_caderno and "Arquitetura" in item.foto_caderno.name %}<img src="{{ item.foto_caderno.url }}" alt="Diagrama MVT desenhado à mão" style="max-width:500px; display:block; margin:16px auto; border-radius:12px;">{% endif %}{% endfor %}
     <h4>Video-tutorial</h4>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/oDEnLL46uzY?autoplay=0" title="Video-tutorial Django CRUD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block; margin:16px auto; border-radius:12px;"></iframe>
     <p><a href="https://youtu.be/oDEnLL46uzY" target="_blank">Ver vídeo no YouTube</a></p>
@@ -17,7 +17,7 @@
 <section>
     <h3>Modelação: Diagrama Entidade-Relação</h3>
     <p>O DER abaixo representa a estrutura de dados do portfolio, com as entidades principais e as suas relações. O modelo inclui entidades como Projeto, Tecnologia, Competência, Formação e Unidade Curricular, interligadas através de relações de chave estrangeira e muitos-para-muitos.</p>
-    <img src="/media/makingof/DER-_portfolio.jpeg" alt="DER do Portfolio" style="max-width:600px; display:block; margin:16px auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+    {% for item in makingof %}{% if item.foto_caderno and "DER-_portfolio" in item.foto_caderno.name %}<img src="{{ item.foto_caderno.url }}" alt="DER do Portfolio" style="max-width:600px; display:block; margin:16px auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">{% endif %}{% endfor %}
 </section>
 
 <section>
@@ -44,7 +44,7 @@
 <section>
     <h3>Estrutura das Páginas</h3>
     <p>Mapa de navegação da aplicação com todas as páginas e ligações entre elas.</p>
-    <img src="/media/makingof/Mapa.png" alt="Mapa de navegação" style="max-width:600px; display:block; margin:16px auto; border-radius:12px;">
+    {% for item in makingof %}{% if item.foto_caderno and "Mapa" in item.foto_caderno.name %}<img src="{{ item.foto_caderno.url }}" alt="Mapa de navegação" style="max-width:600px; display:block; margin:16px auto; border-radius:12px;">{% endif %}{% endfor %}
 </section>
 
 <section>
