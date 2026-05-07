@@ -1,12 +1,14 @@
-# Portfolio Django — Miguel Baptista
-
-Aplicação web Django que serve como portfolio académico e pessoal, desenvolvida no âmbito da UC de Programação Web da Licenciatura em Engenharia Informática da Universidade Lusófona.
-
 ## Como correr o projeto
+
+### Criar e ativar ambiente virtual
+```bash
+python -m venv venv
+source venv/bin/activate
+```
 
 ### Instalar dependências
 ```bash
-pip install django pillow requests django-markdownify whitenoise
+pip install -r requirements.txt
 ```
 
 ### Migrações
@@ -30,14 +32,21 @@ python data/load_initial_data.py && python data/load_ucs.py && python data/load_
 python manage.py loaddata data/load_escola_fixture.json
 ```
 
+### Ficheiros estáticos
+```bash
+python manage.py collectstatic --noinput
+```
+
 ### Correr o servidor
 ```bash
 python manage.py runserver 0.0.0.0:8000
 ```
 
 ## Estrutura do Projeto
-- `portfolio/` — App Django com os modelos
+- `portfolio/` — App Django com os modelos do portfolio
 - `escola/` — App Django de exemplo com modelos Professor/Aluno/Curso
+- `artigos/` — App Django para publicação de artigos com likes e comentários
+- `accounts/` — App Django para autenticação (login, registo, magic link)
 - `data/` — Scripts de carregamento de dados e ficheiros JSON
 - `media/makingof/` — Fotografias do processo (DER desenhado à mão)
 - `MAKING_OF.md` — Diário de bordo do processo de modelação
@@ -50,7 +59,7 @@ Licenciatura, UnidadeCurricular, Docente, Projeto, Tecnologia, TipoTecnologia, T
 - 29 Unidades Curriculares com descrições da API Lusófona
 - 3 Docentes reais com emails e URLs da Lusófona
 - 3 Projetos com imagens
-- 12 Tecnologias organizadas por tipo
+- 12 Tecnologias organizadas por tipo (Frontend, Backend, Base de Dados, Storage, Outros)
 - 35 TFCs
 - 8 Competências
 - 5 Formações + 1 Certificado
