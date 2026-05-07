@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'accounts',
     'artigos',
     'markdownify.apps.MarkdownifyConfig',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 LOGIN_URL = '/accounts/login/'
@@ -86,6 +88,21 @@ WSGI_APPLICATION = 'portfolio_project.wsgi.application'
 
 DATABASES = {
     "default": env.db("DATABASE_URL")
+}
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': env('CLOUDINARY_API_KEY'),
+    'API_SECRET': env('CLOUDINARY_API_SECRET'),
+}
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
 }
 
 
