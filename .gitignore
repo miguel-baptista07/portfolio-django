@@ -139,3 +139,4 @@ Thumbs.db
 # Media uploads
 media/uploads/*
 !media/uploads/.gitkeep
+venv/
