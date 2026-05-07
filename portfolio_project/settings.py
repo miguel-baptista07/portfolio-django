@@ -146,8 +146,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (uploads)
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = 'media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = 'media/'
 
 MARKDOWNIFY = {
     "default": {
