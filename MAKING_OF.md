@@ -124,6 +124,25 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 **Decisão 3 — Comentários só para autenticados:** Segue o requisito do enunciado — qualquer pessoa vê os artigos, mas só utilizadores com conta podem comentar.  
 **Decisão 4 — Grupo `autores`:** Utilizadores registados são automaticamente adicionados ao grupo autores, com permissão para criar e editar artigos.
 
+## Ficha 10 — CI/CD e Deploy em Produção
+
+### Arquitetura Cloud
+**Decisão 1 — PostgreSQL no Neon:** Migrei a base de dados de SQLite local para PostgreSQL na cloud (Neon). Permite que a aplicação funcione em qualquer ambiente sem depender de ficheiros locais.  
+**Decisão 2 — Ficheiros media no Cloudinary:** Os ficheiros de media (imagens) passaram a ser guardados no Cloudinary. Evita perda de dados quando o container reinicia.  
+**Decisão 3 — WhiteNoise para ficheiros estáticos:** Configurado para servir CSS e JS diretamente pelo Django em produção, sem necessidade de servidor web adicional para estáticos.
+
+### Ambiente Virtual e Dependências
+**Decisão 1 — `venv` isolado:** Criei um ambiente virtual para isolar as dependências do projeto do sistema operativo.  
+**Decisão 2 — `requirements.txt` atualizado:** Adicionados `psycopg2-binary`, `dj-database-url`, `django-environ`, `cloudinary`, `django-cloudinary-storage` e `gunicorn`.
+
+### Deploy com Docker e CI/CD
+**Decisão 1 — Repositório na organização pw-2425-alunos:** Criei o repositório `miguelbaptista22405192` baseado no template `django-template` que inclui o pipeline CI/CD.  
+**Decisão 2 — GitHub Secrets:** As variáveis sensíveis (DATABASE_URL, CLOUDINARY_*, SECRET_KEY) são guardadas como Secrets no GitHub e injetadas no container em produção.  
+**O que aprendi:** Cada push para o repositório dispara automaticamente o build Docker e o deploy no servidor do DEISI — é o conceito de CI/CD na prática.
+
+### Aplicação Live
+A aplicação está disponível em: https://miguelbaptista22405192.pw.deisi.ulusofona.pt/
+
 ---
 
 ## Erros Encontrados e Correções
@@ -139,6 +158,10 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 | 7 | Tecnologias Django, Python e Git sem tipo associado | Associadas via shell ao tipo correto após criação do TipoTecnologia |
 | 8 | Templates Django não suportam `.filter().exists()` em `{% if %}` | Verificação movida para a view, passando `is_gestor` e `is_autor` no context |
 | 9 | Utilizadores `gestor` e `pw25profs` com `is_active=False` | Corrigido via shell com `update(is_active=True)` |
+| 10 | Repositório com letras maiúsculas bloqueou o build Docker | Nome do repositório alterado para lowercase |
+| 11 | Django==6.0.5 incompatível com Python 3.11 do Docker | Downgrade para Django==5.2.1 |
+| 12 | collectstatic falhava no build por falta de variáveis | Adicionados valores default no settings.py |
+| 13 | Gunicorn apontava para `project.wsgi` em vez de `portfolio_project.wsgi` | Corrigido o CMD no Dockerfile |
 ---
 
 ## Uso de Inteligência Artificial
