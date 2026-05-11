@@ -81,6 +81,11 @@ O DER foi desenhado à mão no caderno antes de iniciar a implementação. A fot
 
 ---
 
+## Ficha 7 — Views, Templates e Navegação
+
+### Navegação entre Apps
+**Decisão — Botão Portfolio no nav da Escola:** Adicionei um 4º link "Portfolio" no nav da app Escola (`escola/templates/escola/base.html`) que aponta para `/portfolio/projetos/`. Permite navegar diretamente da Escola para o Portfolio sem alterar o URL manualmente.
+
 ## Ficha 8 — Formulários CRUD e Página Sobre
 
 ### Formulários CRUD
